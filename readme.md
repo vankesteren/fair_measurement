@@ -15,7 +15,7 @@ Ensure you have `R` and `RStudio` installed and run the following lines to insta
 - `remotes::install_github("vankesteren/firatheme")`
 
 ### Running the code
-The structure of the folder follows loosely the structure of the _Experiments_ section in the manuscript. Clone this repository, open the `10_fair_inference.Rproj` file and run the following files in order:
+The structure of the folder follows loosely the structure of the _Experiments_ section in the manuscript. Clone this repository, open the `fair_measurement.Rproj` file and run the following files in order:
 
 
 | Section | Main R file | Main output |
