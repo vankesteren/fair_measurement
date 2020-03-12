@@ -2,7 +2,7 @@
 
 _L. Boeschoten, E.-J. van Kesteren, A. Bagheri, & D.L. Oberski_
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![DOI](https://zenodo.org/badge/246888221.svg)](https://zenodo.org/badge/latestdoi/246888221) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 This is a reproducible code repository supporting the manuscript. By running the `R` scripts in this repository, all the figures and tables can be reproduced. This repository follows a CC-BY 4.0 license.
 
