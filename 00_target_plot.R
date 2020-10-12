@@ -10,13 +10,13 @@
 # last edited 2020-03-06 by @vankesteren
 # License: CC-BY 4.0 MSDSlab
 
-target_plot <- function(df_pred, risk_score_var, target_var, smooth = 1.5) {
+target_plot <- function(df_pred, risk_score_var, target_var, smooth = 1.5, ntile = 100) {
   # tidyverse-style variable quosures
   target_var     <- enquo(target_var)
   risk_score_var <- enquo(risk_score_var)
   
   df_pred %>% 
-    mutate(perc = ntile(!!risk_score_var, 100)) %>% 
+    mutate(perc = ntile(!!risk_score_var, ntile)) %>% 
     group_by(perc, race) %>% 
     summarize(
       value = mean(!!target_var, na.rm = TRUE),

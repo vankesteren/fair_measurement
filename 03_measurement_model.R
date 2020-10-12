@@ -10,6 +10,7 @@ library(patchwork)
 library(lavaan)
 source("./00_data_preprocessing.R")
 source("./00_target_plot.R")
+source("./00_target_metric.R")
 source("./03a_lavaan_syntax.R")
 source("./03b_lavaan_risk_score.R")
 
@@ -94,8 +95,40 @@ df_pred$risk_score_latent[test_fit_latent@Data@case.idx[[1]]] <-
 tgt_plot_latent <- df_pred %>% 
   target_plot(risk_score_latent, gagne_sum_t, 1) +
   labs(y = "Number of chronic conditions", 
-       title = "Latent risk score")
+       x = "Percentile of latent risk score")
 
-tgt_plot_replicated + tgt_plot_parity + tgt_plot_latent
+(tgt_plot_replicated + ggtitle("A") +
+ tgt_plot_parity     + ggtitle("B") +
+ tgt_plot_latent     + ggtitle("C")) * 
+  theme(legend.direction = "vertical") + 
+  plot_layout(guides = "collect")
+
 firaSave("output/03_measurement_model.pdf", width = 15, height = 6)
 
+# -----------------------------------------
+# Target metric to compare to other methods
+# -----------------------------------------
+
+# get all the risk scores
+r_commercial <- df_pred$risk_score_t
+r_replicated <- read_rds("output/02_risk_score_rep.rds")
+r_corrected  <- read_rds("output/02_risk_score_par.rds")
+r_latent     <- df_pred$risk_score_latent
+
+c_conditions <- df_pred$gagne_sum_t
+health_costs <- df_pred$cost_t_log
+
+race         <- df_pred$race
+
+
+tab <- tibble(
+  risk_score = c("commercial", "replicated", "corrected", "latent"),
+  disparity  = list(
+    disparity_lin(c_conditions, r_commercial, race), 
+    disparity_lin(c_conditions, r_replicated, race), 
+    disparity_lin(c_conditions, r_corrected,  race), 
+    disparity_lin(c_conditions, r_latent,     race)
+  )
+) %>% unnest_wider(disparity)
+
+xtable::xtable(tab, digits = 3)

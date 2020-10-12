@@ -1,6 +1,6 @@
 # Risk score replication for variable selection for SafeML manuscript
 # Ayoub Bagheri, Laura Boeschoten, Erik-Jan van Kesteren, Daniel Oberski
-# last edited 2020-03-09 by @vankesteren
+# last edited 2020-10-05 by @vankesteren
 # License: CC-BY 4.0 MSDSlab
 library(tidyverse)
 library(firatheme)
